@@ -1,21 +1,21 @@
 # Diamond
 
-**TODO: Add description**
+An in-memory key/value storage heavily optimized for fast reads at the expense of slow write time
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `diamond` to your list of dependencies in `mix.exs`:
+Coming soon to Hex!
+
+## Usage
 
 ```elixir
-def deps do
-  [
-    {:diamond, "~> 0.1.0"}
-  ]
-end
+data = get_key_value_pairs()
+:ok = Diamond.initialize(data)
+
+Diamond.put(:foo, "value")
+"value" = Diamond.get(:foo)
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/diamond>.
+## Benchmarks
 
+Coming soon:  comparison with `:ets`, `:persistent_term`, and more
