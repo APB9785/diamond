@@ -47,4 +47,15 @@ defmodule Diamond do
     module = @diamond_storage_module
     module.state(key)
   end
+
+  @doc """
+  Removes all data from the Diamond storage.
+  """
+  @spec clear() :: :ok
+  def clear do
+    module = @diamond_storage_module
+    :code.delete(module)
+    :code.purge(module)
+    :ok
+  end
 end
