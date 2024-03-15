@@ -1,6 +1,6 @@
 # Diamond
 
-An in-memory key/value storage heavily optimized for fast reads at the expense of slow write time
+A read-only in-memory key/value storage optimized for maximum performance
 
 ## Installation
 
@@ -9,11 +9,10 @@ Coming soon to Hex!
 ## Usage
 
 ```elixir
-data = get_key_value_pairs()
+data = %{foo: "bar", baz: "bong"}
 :ok = Diamond.initialize(data)
 
-Diamond.put(:foo, "value")
-"value" = Diamond.get(:foo)
+"bar" = Diamond.get(:foo)
 ```
 
 ## Benchmarks
