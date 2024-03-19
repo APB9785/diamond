@@ -15,9 +15,7 @@ data = %{foo: "bar", baz: "bong"}
 "bar" = Diamond.get(:foo)
 ```
 
-## Benchmarks (read times)
-
-### Read times
+## Benchmarks (Read Times)
 
 #### Small (1,000 keys)
 ```
@@ -44,7 +42,7 @@ GenServer (Map)   -    922_000 / sec  (62x slower)
 :ets (serialized) -    821_000 / sec  (70x slower)  
 ```
 
-### Initialization Times
+## Benchmarks (Initialization Times)
 
 The time to initialize the data into memory grows linearly with the size of your dataset.
 
