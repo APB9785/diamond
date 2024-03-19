@@ -71,8 +71,10 @@ defmodule Diamond do
   @spec drop() :: :ok
   def drop do
     module = @diamond_storage_module
-    :code.delete(module)
+
     :code.purge(module)
+    :code.delete(module)
+
     :ok
   end
 end
