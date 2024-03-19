@@ -50,6 +50,13 @@ The time to initialize the data into memory grows linearly with the size of your
 
 Therefore, take care when initializing large datasets (especially 100,000+ keys).
 
+## Notes on Benchmarks
+
+Datasets consist of a map for each key, where each map contains 12 sub-keys with string values,
+and each string contains ~26 alphanumeric characters.
+
+Benchmarks were run on a 2021 Macbook Pro, using the [benchee](https://github.com/bencheeorg/benchee) library.
+
 ## License
 
 Copyright (C) 2024 Andrew P Berrien
