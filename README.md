@@ -49,3 +49,12 @@ The time to initialize the data into memory grows linearly with the size of your
 ![Data Initialization Times](assets/data_initialization_time.png)
 
 Therefore, take care when initializing large datasets (especially 100,000+ keys).
+
+## License
+
+Copyright (C) 2024 Andrew P Berrien
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU General Public License](https://www.gnu.org/licenses/gpl.html) for more details.
+
