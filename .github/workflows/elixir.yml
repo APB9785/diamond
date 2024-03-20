@@ -1,0 +1,101 @@
+name: Elixir CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: "test: OTP ${{matrix.otp}} | Elixir ${{matrix.elixir}}"
+
+    strategy:
+      matrix:
+        include:
+          # minimum required versions
+          - otp: "23"
+            elixir: "1.13.0"
+
+          # latest
+          - otp: "26"
+            elixir: "1.16"
+
+    env:
+      MIX_ENV: test
+      MDEX_BUILD: 1
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - name: Cache mix deps
+        uses: actions/cache@v3
+        id: cache-deps
+        with:
+          path: |
+            deps
+            _build
+          key: mix-${{ env.MIX_ENV }}-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            mix-${{ env.MIX_ENV }}-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+
+      - run: mix do deps.get, deps.compile
+
+      - run: mix test
+
+  quality:
+    name: "quality: OTP ${{matrix.otp}} | Elixir ${{matrix.elixir}}"
+
+    strategy:
+      matrix:
+        include:
+          # latest
+          - otp: "26"
+            elixir: "1.16"
+
+    env:
+      MIX_ENV: dev
+      MDEX_BUILD: 1
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - name: Cache mix deps
+        uses: actions/cache@v3
+        id: cache-deps
+        with:
+          path: |
+            deps
+            _build
+          key: mix-${{ env.MIX_ENV }}-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            mix-${{ env.MIX_ENV }}-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+
+      - run: mix do deps.get, deps.compile
+
+      - run: mix compile --force --warnings-as-errors
+
+      - run: mix format --check-formatted
+
+      - run: mix deps.unlock --check-unused
