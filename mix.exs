@@ -13,7 +13,8 @@ defmodule Diamond.MixProject do
       deps: deps(),
 
       # Hex
-      description: "",
+      description:
+        "A read-only in-memory key/value storage optimized for the fastest possible read times",
       package: package(),
 
       # Docs
