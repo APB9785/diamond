@@ -1,10 +1,21 @@
 # Diamond
 
-A read-only in-memory key/value storage optimized for maximum performance
+[![Hex Version](https://img.shields.io/hexpm/v/diamond.svg)](https://hex.pm/packages/diamond)
+[![License](https://img.shields.io/hexpm/l/diamond.svg)](https://github.com/APB9785/diamond/blob/master/LICENSE)
+[![Documentation](https://img.shields.io/badge/documentation-gray)](https://hexdocs.pm/diamond)
+
+Diamond is a read-only in-memory key/value storage optimized for the fastest possible read times.
 
 ## Installation
 
-Coming soon to Hex!
+Add `:diamond` to your list of dependencies in `mix.exs`:
+```elixir
+defp deps do
+  [
+    {:diamond, "~> 0.1"}
+  ]
+end
+```
 
 ## Usage
 
